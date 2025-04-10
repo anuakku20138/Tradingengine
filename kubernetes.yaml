@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nifty50-trading-bot
+  labels:
+    app: nifty50-trading-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nifty50-trading-bot
+  template:
+    metadata:
+      labels:
+        app: nifty50-trading-bot
+    spec:
+      containers:
+      - name: nifty50-trading-bot
+        image: nifty50-trading-bot:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: TELEGRAM_BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: trading-bot-secrets
+              key: telegram-bot-token
+        - name: TELEGRAM_CHANNEL_ID
+          valueFrom:
+            secretKeyRef:
+              name: trading-bot-secrets
+              key: telegram-channel-id
+        - name: PORT
+          value: "8080"
+        - name: LOG_LEVEL
+          value: "INFO"
+        - name: TZ
+          value: "Asia/Kolkata"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "100m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nifty50-trading-bot-service
+spec:
+  selector:
+    app: nifty50-trading-bot
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nifty50-trading-bot-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+  - hosts:
+    - trading-bot.example.com
+    secretName: trading-bot-tls
+  rules:
+  - host: trading-bot.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nifty50-trading-bot-service
+            port:
+              number: 80
