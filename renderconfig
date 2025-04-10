@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: nifty50-trading-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHANNEL_ID
+        sync: false
+      - key: LOG_LEVEL
+        value: INFO
+      - key: PYTHON_VERSION
+        value: 3.10.0
+    scaling:
+      minInstances: 1
+      maxInstances: 1
+    healthCheckPath: /
