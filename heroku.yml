@@ -1,0 +1,9 @@
+# heroku.yml
+setup:
+  addons:
+    - plan: heroku-postgresql:hobby-dev
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: gunicorn app:app
