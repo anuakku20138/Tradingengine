@@ -1,5 +1,11 @@
-message += f"• <b>{symbol}</b>: ₹{rec['current_price']:.2f} ➡️ Target: ₹{rec['target_price']:.2f}\n"
-                    message += f"  RSI: {rec['rsi_14']:.1f} | SL: ₹{rec['stop_loss']:.2f}\n"
+def format_telegram_message(recommendations, global_data):
+    try:
+        message = "📊 Today's Trading Recommendations:\n\n"
+        
+        for rec in recommendations:
+            symbol = rec['symbol']
+            message += f"• <b>{symbol}</b>: ₹{rec['current_price']:.2f} ➡️ Target: ₹{rec['target_price']:.2f}\n"
+            message += f"  RSI: {rec['rsi_14']:.1f} | SL: ₹{rec['stop_loss']:.2f}\n"
         
         message += f"\n<i>Updated at {global_data['last_updated'].strftime('%Y-%m-%d %H:%M')} IST</i>"
         message += "\n<i>Visit https://robot-pdwz.onrender.com/ for full analysis</i>"
@@ -8,7 +14,6 @@ message += f"• <b>{symbol}</b>: ₹{rec['current_price']:.2f} ➡️ Target: �
     except Exception as e:
         logger.error(f"Error formatting Telegram message: {e}")
         return f"Error generating recommendations: {str(e)}"
-
 # Flask routes
 @app.route('/')
 def index():
