@@ -69,9 +69,8 @@ def create_template_files():
     try:
         os.makedirs('templates', exist_ok=True)
         
-        # Index template
-        index_html = """
-<!DOCTYPE html>
+   # Index template
+index_html = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -89,6 +88,7 @@ def create_template_files():
     </style>
 </head>
 <body>
+"""
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Nifty50 Stock Analysis</a>
