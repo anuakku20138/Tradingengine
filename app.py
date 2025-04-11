@@ -334,11 +334,8 @@ index_html = """<!DOCTYPE html>
                                             {% for rec in recommendations %}
                                                 <tr>
                                                     <td><strong>{{ rec.symbol }}</strong></td>
-                                                    <td class="
-                                                        {% if rec.recommendation == 'BUY' %}buy
-                                                        {% elif rec.recommendation == 'SELL' %}sell
-                                                        {% else %}hold{% endif %}">
-                                                        {{ rec.recommendation }}
+                                                   <td class="{% if rec.recommendation == 'BUY' %}buy{% elif rec.recommendation == 'SELL' %}sell{% else %}hold{% endif %}">
+                                                       {{ rec.recommendation }}
                                                     </td>
                                                     <td>{{ "%.2f"|format(rec.current_price) }}</td>
                                                     <td class="{{ 'text-success' if rec.percent_change > 0 else 'text-danger' }}">
