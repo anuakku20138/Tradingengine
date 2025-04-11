@@ -69,26 +69,23 @@ def create_template_files():
     try:
         os.makedirs('templates', exist_ok=True)
         
-   # Index template
-index_html = """<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nifty50 Stock Analysis</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .buy { color: green; font-weight: bold; }
-        .sell { color: red; font-weight: bold; }
-        .hold { color: orange; }
-        .chart-container { height: 400px; overflow: hidden; margin-bottom: 20px; }
-        .chart-img { width: 100%; object-fit: contain; max-height: 400px; }
-        .card { margin-bottom: 20px; }
-        .sticky-header { position: sticky; top: 0; background-color: white; z-index: 100; }
-    </style>
-</head>
-<body>
-"""
+        # Index template
+        index_html = """<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Nifty50 Stock Analysis</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                .buy { color: green; font-weight: bold; }
+                .sell { color: red; font-weight: bold; }
+                .hold { color: orange; }
+                .chart-container { height: 400px; overflow: hidden; margin-bottom: 20px; }
+                .chart-img { width: 100%; object-fit: contain; max-height: 400px; }
+                .card { margin-bottom: 20px; }
+                .sticky-header { position: sticky; top: 0; background-color: white; z-index: 100; }
+            </style>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Nifty50 Stock Analysis</a>
