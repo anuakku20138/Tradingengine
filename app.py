@@ -195,7 +195,7 @@ index_html = """<!DOCTYPE html>
                                                 {% if rec.recommendation == 'BUY' %}
                                                 <tr>
                                                     <td><strong>{{ rec.symbol }}</strong></td>
-                                                    <td>₹{{ "%.2f"|format(rec.current_price) }}</td>
+                                                    <td>{{ "%.2f"|format(rec.current_price) }}</td>
                                                     <td class="{{ 'text-success' if rec.percent_change > 0 else 'text-danger' }}">
                                                         {{ "%.2f"|format(rec.percent_change) }}%
                                                     </td>
