@@ -4,8 +4,8 @@ def format_telegram_message(recommendations, global_data):
         
         for rec in recommendations:
             symbol = rec['symbol']
-            message += f"• <b>{symbol}</b>: ₹{rec['current_price']:.2f} ➡️ Target: ₹{rec['target_price']:.2f}\n"
-            message += f"  RSI: {rec['rsi_14']:.1f} | SL: ₹{rec['stop_loss']:.2f}\n"
+            message += f"• <b>{symbol}</b>: {rec['current_price']:.2f} ➡️ Target: {rec['target_price']:.2f}\n"
+            message += f"  RSI: {rec['rsi_14']:.1f} | SL: {rec['stop_loss']:.2f}\n"
         
         message += f"\n<i>Updated at {global_data['last_updated'].strftime('%Y-%m-%d %H:%M')} IST</i>"
         message += "\n<i>Visit https://robot-pdwz.onrender.com/ for full analysis</i>"
@@ -199,8 +199,8 @@ index_html = """<!DOCTYPE html>
                                                     <td class="{{ 'text-success' if rec.percent_change > 0 else 'text-danger' }}">
                                                         {{ "%.2f"|format(rec.percent_change) }}%
                                                     </td>
-                                                    <td class="text-success">₹{{ "%.2f"|format(rec.target_price) }}</td>
-                                                    <td class="text-danger">₹{{ "%.2f"|format(rec.stop_loss) }}</td>
+                                                    <td class="text-success">{{ "%.2f"|format(rec.target_price) }}</td>
+                                                    <td class="text-danger">{{ "%.2f"|format(rec.stop_loss) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_14) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_7) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_30) }}</td>
@@ -266,12 +266,12 @@ index_html = """<!DOCTYPE html>
                                                 {% if rec.recommendation == 'SELL' %}
                                                 <tr>
                                                     <td><strong>{{ rec.symbol }}</strong></td>
-                                                    <td>₹{{ "%.2f"|format(rec.current_price) }}</td>
+                                                    <td>{{ "%.2f"|format(rec.current_price) }}</td>
                                                     <td class="{{ 'text-success' if rec.percent_change > 0 else 'text-danger' }}">
                                                         {{ "%.2f"|format(rec.percent_change) }}%
                                                     </td>
-                                                    <td class="text-danger">₹{{ "%.2f"|format(rec.target_price) }}</td>
-                                                    <td class="text-warning">₹{{ "%.2f"|format(rec.stop_loss) }}</td>
+                                                    <td class="text-danger">{{ "%.2f"|format(rec.target_price) }}</td>
+                                                    <td class="text-warning">{{ "%.2f"|format(rec.stop_loss) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_14) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_7) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_30) }}</td>
@@ -340,7 +340,7 @@ index_html = """<!DOCTYPE html>
                                                         {% else %}hold{% endif %}">
                                                         {{ rec.recommendation }}
                                                     </td>
-                                                    <td>₹{{ "%.2f"|format(rec.current_price) }}</td>
+                                                    <td>{{ "%.2f"|format(rec.current_price) }}</td>
                                                     <td class="{{ 'text-success' if rec.percent_change > 0 else 'text-danger' }}">
                                                         {{ "%.2f"|format(rec.percent_change) }}%
                                                     </td>
@@ -528,9 +528,9 @@ index_html = """<!DOCTYPE html>
                                                                             {% for trade in result.trades %}
                                                                                 <tr>
                                                                                     <td>{{ trade.entry_date }}</td>
-                                                                                    <td>₹{{ "%.2f"|format(trade.entry_price) }}</td>
+                                                                                    <td>{{ "%.2f"|format(trade.entry_price) }}</td>
                                                                                     <td>{{ trade.exit_date }}</td>
-                                                                                    <td>₹{{ "%.2f"|format(trade.exit_price) }}</td>
+                                                                                    <td>{{ "%.2f"|format(trade.exit_price) }}</td>
                                                                                     <td class="{{ 'text-success' if trade.profit_pct > 0 else 'text-danger' }}">
                                                                                         {{ "%.2f"|format(trade.profit_pct) }}%
                                                                                     </td>
@@ -624,8 +624,8 @@ index_html = """<!DOCTYPE html>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-message += f"• <b>{symbol}</b>: ₹{rec['current_price']:.2f} ➡️ Target: ₹{rec['target_price']:.2f}\n"
-                    message += f"  RSI: {rec['rsi_14']:.1f} | SL: ₹{rec['stop_loss']:.2f}\n"
+message += f"• <b>{symbol}</b>: {rec['current_price']:.2f} ➡️ Target: {rec['target_price']:.2f}\n"
+                    message += f"  RSI: {rec['rsi_14']:.1f} | SL: {rec['stop_loss']:.2f}\n"
         
         message += f"\n<i>Updated at {global_data['last_updated'].strftime('%Y-%m-%d %H:%M')} IST</i>"
         message += "\n<i>Visit https://robot-pdwz.onrender.com/ for full analysis</i>"
@@ -816,12 +816,12 @@ def create_template_files():
                                                 {% if rec.recommendation == 'BUY' %}
                                                 <tr>
                                                     <td><strong>{{ rec.symbol }}</strong></td>
-                                                    <td>₹{{ "%.2f"|format(rec.current_price) }}</td>
+                                                    <td>{{ "%.2f"|format(rec.current_price) }}</td>
                                                     <td class="{{ 'text-success' if rec.percent_change > 0 else 'text-danger' }}">
                                                         {{ "%.2f"|format(rec.percent_change) }}%
                                                     </td>
-                                                    <td class="text-success">₹{{ "%.2f"|format(rec.target_price) }}</td>
-                                                    <td class="text-danger">₹{{ "%.2f"|format(rec.stop_loss) }}</td>
+                                                    <td class="text-success">{{ "%.2f"|format(rec.target_price) }}</td>
+                                                    <td class="text-danger">{{ "%.2f"|format(rec.stop_loss) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_14) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_7) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_30) }}</td>
@@ -887,12 +887,12 @@ def create_template_files():
                                                 {% if rec.recommendation == 'SELL' %}
                                                 <tr>
                                                     <td><strong>{{ rec.symbol }}</strong></td>
-                                                    <td>₹{{ "%.2f"|format(rec.current_price) }}</td>
+                                                    <td>{{ "%.2f"|format(rec.current_price) }}</td>
                                                     <td class="{{ 'text-success' if rec.percent_change > 0 else 'text-danger' }}">
                                                         {{ "%.2f"|format(rec.percent_change) }}%
                                                     </td>
-                                                    <td class="text-danger">₹{{ "%.2f"|format(rec.target_price) }}</td>
-                                                    <td class="text-warning">₹{{ "%.2f"|format(rec.stop_loss) }}</td>
+                                                    <td class="text-danger">{{ "%.2f"|format(rec.target_price) }}</td>
+                                                    <td class="text-warning">{{ "%.2f"|format(rec.stop_loss) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_14) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_7) }}</td>
                                                     <td>{{ "%.1f"|format(rec.rsi_30) }}</td>
@@ -961,7 +961,7 @@ def create_template_files():
                                                         {% else %}hold{% endif %}">
                                                         {{ rec.recommendation }}
                                                     </td>
-                                                    <td>₹{{ "%.2f"|format(rec.current_price) }}</td>
+                                                    <td>{{ "%.2f"|format(rec.current_price) }}</td>
                                                     <td class="{{ 'text-success' if rec.percent_change > 0 else 'text-danger' }}">
                                                         {{ "%.2f"|format(rec.percent_change) }}%
                                                     </td>
@@ -1149,9 +1149,9 @@ def create_template_files():
                                                                             {% for trade in result.trades %}
                                                                                 <tr>
                                                                                     <td>{{ trade.entry_date }}</td>
-                                                                                    <td>₹{{ "%.2f"|format(trade.entry_price) }}</td>
+                                                                                    <td>{{ "%.2f"|format(trade.entry_price) }}</td>
                                                                                     <td>{{ trade.exit_date }}</td>
-                                                                                    <td>₹{{ "%.2f"|format(trade.exit_price) }}</td>
+                                                                                    <td>{{ "%.2f"|format(trade.exit_price) }}</td>
                                                                                     <td class="{{ 'text-success' if trade.profit_pct > 0 else 'text-danger' }}">
                                                                                         {{ "%.2f"|format(trade.profit_pct) }}%
                                                                                     </td>
@@ -1334,7 +1334,7 @@ def create_template_files():
                                         {% for stock in summary.top_gainers %}
                                             <tr>
                                                 <td><strong>{{ stock.symbol }}</strong></td>
-                                                <td>₹{{ "%.2f"|format(stock.price) }}</td>
+                                                <td>{{ "%.2f"|format(stock.price) }}</td>
                                                 <td class="text-success">+{{ "%.2f"|format(stock.change_pct) }}%</td>
                                             </tr>
                                         {% endfor %}
@@ -1355,7 +1355,7 @@ def create_template_files():
                                         {% for stock in summary.top_losers %}
                                             <tr>
                                                 <td><strong>{{ stock.symbol }}</strong></td>
-                                                <td>₹{{ "%.2f"|format(stock.price) }}</td>
+                                                <td>{{ "%.2f"|format(stock.price) }}</td>
                                                 <td class="text-danger">{{ "%.2f"|format(stock.change_pct) }}%</td>
                                             </tr>
                                         {% endfor %}
